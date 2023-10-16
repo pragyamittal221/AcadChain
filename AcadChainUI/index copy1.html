@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AcadChain</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AcadChain</h1>
+    </div>
+
+    <div class="content">
+      <div class="button-container">
+        <button onclick="connectMetamask()">Connect to Metamask</button>
+        <p id="accountArea"></p>
+      </div>
+
+      <div class="button-container">
+          <button onclick="connectContract()">Load Contract</button>
+          <p id="contractArea"></p>
+        </div>
+      </div>
+    </div>
+    <p>I am a...</p>
+      <button onclick="redirectTo('student.html')">Student</button>
+      <button onclick="redirectTo('teacher.html')">Teacher</button>
+      <button onclick="redirectTo('admin.html')">Admin</button>
+  </div>
+</body>
+</html>

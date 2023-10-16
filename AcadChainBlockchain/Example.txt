@@ -1,0 +1,30 @@
+let acadChain = await acadChainSystem.deployed()
+
+let accounts = await web3.eth.getAccounts()
+
+acadChain.addStudent(accounts[2])
+acadChain.addTeacher(accounts[1])
+
+acadChain.isStudent(accounts[2])
+acadChain.isTeacher(accounts[1])
+
+acadChain.addTeacher("Anand1",["CSE01","CSE02"],[5,3])
+
+acadChain.addTeacher("Bapatla1",["CSE01","CSE02"],[5,3])
+
+acadChain.getPasswords("Anand1","CSE01")
+acadChain.getPasswords("Anand1","CSE02")
+
+acadChain.getPasswords("Bapatla1","CSE01")
+
+
+acadChain.addReview("Anand1","CSE01",5,"Good",98214,{from: accounts[2]})
+
+acadChain.getReview("Anand1","CSE01")
+acadChain.getReview("Anand1","CSE01",{from: accounts[2]})
+acadChain.getReview("Anand1","CSE01",{from: accounts[1]})
+
+0xc926402D677BB351959AD7054BedDaF601270633
+
+
+truffle deploy --reset

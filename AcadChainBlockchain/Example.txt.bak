@@ -1,0 +1,16 @@
+let acadChain = await acadChainSystem.deployed()
+
+let accounts = await web3.eth.getAccounts()
+
+acadChain.addStudent(accounts[2])
+acadChain.addTeacher(accounts[1])
+acadChain.addTeacher("Anand1",["CSE01","CSE02"],[5,3])
+
+acadChain.getPasswords("Anand1","CSE01")
+acadChain.getPasswords("Anand1","CSE02")
+
+
+acadChain.addReview("Anand1","CSE01",5,"Good",96216,{from: accounts[2]})
+
+acadChain.getReview("Anand1","CSE01")
+acadChain.getReview("Anand1","CSE01",{from: accounts[2]})
