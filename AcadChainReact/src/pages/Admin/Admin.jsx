@@ -4,18 +4,14 @@ import TeacherReview from "./TeacherReview";
 import PdfUploadForm from "./PdfUploadForm";
 import Teacher from "./../Teacher/Teacher";
 
-function Admin({contract, teacherRegistrationData}) {
+function Admin({contract}) {
   
-  useEffect(() => {
-    console.log("teacherRegstrationData from Admin.jsx", teacherRegistrationData); 
-  }, [teacherRegistrationData]);
-
   return (
     <div className="">
       Admin
       <Teacher />
       <PdfUploadForm />
-      {/* <TeacherReview contract={contract} teacherRegistrationData={teacherRegistrationData} /> */}
+      {/* {<TeacherReview contract={contract} /> } */}
     </div>
   );
 }

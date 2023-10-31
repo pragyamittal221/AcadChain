@@ -18,14 +18,75 @@ contract AcadChainContract is Ownable, TeacherRole {
         string comments;
     }
 
-    Review[] public reviews;
+    struct TeacherRegistrationData {
+        address userAddress;
+        string teacherCode;
+        string subjectCodes;
+        string studentCounts;
+    }
 
+    mapping(address => TeacherRegistrationData) public teacherRegistrationData;
     mapping(string => TeacherData) teachers;
     mapping(uint => bool) usedPasswords;
+
+    Review[] public reviews;
+    address[] public teacherRegistrationKeys;
 
     modifier checkEitherOwnerOrTeacher() {
         if ((isOwner() == true) || (isTeacher(msg.sender) == true)) {
             _;
+        }
+    }
+
+    function storeTeacherRegistrationData(
+        address _userAddress,
+        string memory _teacherCode,
+        string memory _subjectCodes,
+        string memory _studentCounts
+    ) public {
+        teacherRegistrationData[_userAddress] = TeacherRegistrationData({
+            userAddress: _userAddress,
+            teacherCode: _teacherCode,
+            subjectCodes: _subjectCodes,
+            studentCounts: _studentCounts
+        });
+    }
+
+    function getTeacherRegistrationData()
+        public
+        view
+        returns (TeacherRegistrationData[] memory)
+    {
+        TeacherRegistrationData[] memory data;
+
+        for (uint i = 0; i < teacherRegistrationKeys.length; i++) {
+            TeacherRegistrationData storage trd = teacherRegistrationData[
+                teacherRegistrationKeys[i]
+            ];
+            data[i] = TeacherRegistrationData({
+                userAddress: trd.userAddress,
+                teacherCode: trd.teacherCode,
+                subjectCodes: trd.subjectCodes,
+                studentCounts: trd.studentCounts
+            });
+        }
+
+        return data;
+    }
+
+    function deleteTeacherRegistrationData(
+        address _userAddress
+    ) public onlyOwner {
+        delete teacherRegistrationData[_userAddress];
+
+        for (uint i = 0; i < teacherRegistrationKeys.length; i++) {
+            if (teacherRegistrationKeys[i] == _userAddress) {
+                teacherRegistrationKeys[i] = teacherRegistrationKeys[
+                    teacherRegistrationKeys.length - 1
+                ];
+                teacherRegistrationKeys.pop();
+                break;
+            }
         }
     }
 
@@ -34,7 +95,6 @@ contract AcadChainContract is Ownable, TeacherRole {
         string[] memory _subjectCodes,
         uint[] memory _studentCount
     ) public onlyOwner {
-
         teachers[_teacherCode].code = _teacherCode;
         teachers[_teacherCode].subjectCodes = _subjectCodes;
 
@@ -59,7 +119,11 @@ contract AcadChainContract is Ownable, TeacherRole {
 
     function getTeacher(
         string memory _teacherCode
-    ) public view checkEitherOwnerOrTeacher returns (string memory code, string[] memory subjectCodes)
+    )
+        public
+        view
+        checkEitherOwnerOrTeacher
+        returns (string memory code, string[] memory subjectCodes)
     {
         TeacherData storage teacher = teachers[_teacherCode];
         return (teacher.code, teacher.subjectCodes);

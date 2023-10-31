@@ -12,8 +12,6 @@ import AcadChainContract from "./AcadChainContract.json";
 function App() {
   const [account, setAccount] = useState("0x0");
   const [contract, setContract] = useState(null);
-  const [teacherRegistrationData, setTeacherRegistrationData] = useState(null);
-
   
   useEffect(() => {
     if (window.ethereum) {
@@ -28,10 +26,6 @@ function App() {
     console.log('account state updated', account);
   }, [account]);
   
-  useEffect(() => {
-    console.log("teacherRegstrationData from app.jsx", teacherRegistrationData); 
-  }, [teacherRegistrationData]);
-
   const handleConnectWallet = async () => {
     if (window.ethereum) {
       try {
@@ -47,7 +41,7 @@ function App() {
 
   const connectContract = async (selectedAccount) => {
     const web3 = new Web3(window.ethereum);
-    const contractInstance = new web3.eth.Contract(AcadChainContract.abi, "0xEED2cC6837606ae40931105960372831f83e1020");
+    const contractInstance = new web3.eth.Contract(AcadChainContract.abi, "0x99aBdeD799479Aa68B2cf3ff280AEf98926f1e68");
 
     setContract(contractInstance);
   };
@@ -56,13 +50,13 @@ function App() {
   return (
     <div>
       <Router>
-        <Navbar account={account} />
+        <Navbar account={account} contract={contract} />
         <Routes>
           <Route path="/" element={<Default handleConnectWallet={handleConnectWallet}/>} />
-          <Route path="/admin" element={<Admin contract={contract} teacherRegistrationData={teacherRegistrationData}/>} />
+          <Route path="/admin" element={<Admin contract={contract} />} />
           <Route path="/student" element={<Student contract={contract}/>} />
           <Route path="/teacher" element={<Teacher />} />
-          <Route path="/teachernotapproved" element={<TeacherNotApproved setTeacherRegistrationData={setTeacherRegistrationData} />} />
+          <Route path="/teachernotapproved" element={<TeacherNotApproved contract={contract}/>} />
         </Routes>
       </Router>
     </div>

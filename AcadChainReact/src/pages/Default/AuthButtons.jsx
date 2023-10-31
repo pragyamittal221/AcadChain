@@ -34,6 +34,9 @@ function AuthButtons({handleConnectWallet}) {
           <Button ripple={true} className="m-2">
             <Link to="/admin">Admin</Link>
           </Button>
+          <Button ripple={true} className="m-2">
+            <Link to="/teachernotapproved">Teacher not approved</Link>
+          </Button>
         </div>
       </div>
     </div>

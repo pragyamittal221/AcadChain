@@ -91,19 +91,19 @@
   "sourceMap": "199:1581:4:-;;;616:92;8:9:-1;5:2;;;30:1;27;20:12;5:2;616:92:4;679:23;691:10;679:11;;;:23;;:::i;:::-;199:1581;;1437:114;1491:21;1504:7;1491:8;:12;;;;;;:21;;;;:::i;:::-;1537:7;1524:21;;;;;;;;;;;;1437:114;:::o;296:172:3:-;388:1;369:21;;:7;:21;;;;361:30;;;;;;407:18;411:4;417:7;407:3;;;:18;;:::i;:::-;406:19;398:28;;;;;;458:4;435;:11;;:20;447:7;435:20;;;;;;;;;;;;;;;;:27;;;;;;;;;;;;;;;;;;296:172;;:::o;798:173::-;885:4;928:1;909:21;;:7;:21;;;;901:30;;;;;;945:4;:11;;:20;957:7;945:20;;;;;;;;;;;;;;;;;;;;;;;;;938:27;;798:173;;;;:::o;199:1581:4:-;;;;;;;",
   "deployedSourceMap": "199:1581:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;199:1581:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1098:89;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1098:89:4;;;;;;;;;;;;;;;;;;;:::i;:::-;;1257:85;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1257:85:4;;;;;;;;;;;;;;;;;;;:::i;:::-;;931:104;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;931:104:4;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;1098:89;834:21;844:10;834:9;:21::i;:::-;826:30;;;;;;1161:20;1173:7;1161:11;:20::i;:::-;1098:89;:::o;1257:85::-;1313:23;1328:7;1313:14;:23::i;:::-;1257:85;:::o;931:104::-;988:4;1008:21;1021:7;1008:8;:12;;:21;;;;:::i;:::-;1001:28;;931:104;;;:::o;1437:114::-;1491:21;1504:7;1491:8;:12;;:21;;;;:::i;:::-;1537:7;1524:21;;;;;;;;;;;;1437:114;:::o;1655:122::-;1712:24;1728:7;1712:8;:15;;:24;;;;:::i;:::-;1763:7;1748:23;;;;;;;;;;;;1655:122;:::o;798:173:3:-;885:4;928:1;909:21;;:7;:21;;;;901:30;;;;;;945:4;:11;;:20;957:7;945:20;;;;;;;;;;;;;;;;;;;;;;;;;938:27;;798:173;;;;:::o;296:172::-;388:1;369:21;;:7;:21;;;;361:30;;;;;;407:18;411:4;417:7;407:3;:18::i;:::-;406:19;398:28;;;;;;458:4;435;:11;;:20;447:7;435:20;;;;;;;;;;;;;;;;:27;;;;;;;;;;;;;;;;;;296:172;;:::o;539:175::-;634:1;615:21;;:7;:21;;;;607:30;;;;;;652:18;656:4;662:7;652:3;:18::i;:::-;644:27;;;;;;703:5;680:4;:11;;:20;692:7;680:20;;;;;;;;;;;;;;;;:28;;;;;;;;;;;;;;;;;;539:175;;:::o",
   "source": "// SPDX-License-Identifier: GPL-3.0\r\npragma solidity >=0.4.24;\r\n\r\n// Import the library 'Roles'\r\nimport \"./Roles.sol\";\r\n\r\n// Define a contract 'TeacherRole' to manage this role - add, remove, check\r\ncontract TeacherRole {\r\n  using Roles for Roles.Role;\r\n  // Define 2 events, one for Adding, and other for Removing\r\n  event TeacherAdded(address indexed account);\r\n  event TeacherRemoved(address indexed account);\r\n\r\n  // Define a struct 'Teachers' by inheriting from 'Roles' library, struct Role\r\n  Roles.Role private Teachers;\r\n  // In the constructor make the address that deploys this contract the 1st Teacher\r\n  constructor() public{\r\n    //_addConstructor(msg.sender);\r\n    _addTeacher(msg.sender);\r\n  }\r\n\r\n  // Define a modifier that checks to see if msg.sender has the appropriate role\r\n  modifier onlyTeacher() {\r\n    require(isTeacher(msg.sender));\r\n    _;\r\n  }\r\n\r\n  // Define a function 'isTeacher' to check this role\r\n  function isTeacher(address account) public view returns (bool) {\r\n    return Teachers.has(account);\r\n  }\r\n\r\n  // Define a function 'addTeacher' that adds this role\r\n  function addTeacher(address account) public onlyTeacher {\r\n    _addTeacher(account);\r\n  }\r\n\r\n  // Define a function 'renounceTeacher' to renounce this role\r\n  function renounceTeacher(address account) public {\r\n    _removeTeacher(account);\r\n  }\r\n\r\n  // Define an internal function '_addTeacher' to add this role, called by 'addTeacher'\r\n  function _addTeacher(address account) internal {\r\n    Teachers.add(account);\r\n    emit TeacherAdded(account);\r\n  }\r\n\r\n  // Define an internal function '_removeTeacher' to remove this role, called by 'removeTeacher'\r\n  function _removeTeacher(address account) internal {\r\n    Teachers.remove(account);\r\n    emit TeacherRemoved(account);\r\n  }\r\n}",
-  "sourcePath": "C:\\Users\\pragy\\Desktop\\Workspaces\\Projects\\STABLE - AcadChainDapp v1.1 - Copy\\AcadChainDapp\\AcadChain\\contracts\\TeacherRole.sol",
+  "sourcePath": "C:\\Users\\pragy\\Desktop\\Workspaces\\Projects\\AcadChainDapp\\AcadChain\\AcadChainBlockchain\\contracts\\TeacherRole.sol",
   "ast": {
     "absolutePath": "project:/contracts/TeacherRole.sol",
     "exportedSymbols": {
       "TeacherRole": [
-        667
+        806
       ]
     },
-    "id": 668,
+    "id": 807,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 565,
+        "id": 704,
         "literals": [
           "solidity",
           ">=",
@@ -116,10 +116,10 @@
       {
         "absolutePath": "project:/contracts/Roles.sol",
         "file": "./Roles.sol",
-        "id": 566,
+        "id": 705,
         "nodeType": "ImportDirective",
-        "scope": 668,
-        "sourceUnit": 564,
+        "scope": 807,
+        "sourceUnit": 703,
         "src": "97:21:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -130,24 +130,24 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 667,
+        "id": 806,
         "linearizedBaseContracts": [
-          667
+          806
         ],
         "name": "TeacherRole",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 569,
+            "id": 708,
             "libraryName": {
               "contractScope": null,
-              "id": 567,
+              "id": 706,
               "name": "Roles",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 563,
+              "referencedDeclaration": 702,
               "src": "231:5:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Roles_$563",
+                "typeIdentifier": "t_contract$_Roles_$702",
                 "typeString": "library Roles"
               }
             },
@@ -155,13 +155,13 @@
             "src": "225:27:4",
             "typeName": {
               "contractScope": null,
-              "id": 568,
+              "id": 707,
               "name": "Roles.Role",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 476,
+              "referencedDeclaration": 615,
               "src": "241:10:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_Role_$476_storage_ptr",
+                "typeIdentifier": "t_struct$_Role_$615_storage_ptr",
                 "typeString": "struct Roles.Role"
               }
             }
@@ -169,20 +169,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 573,
+            "id": 712,
             "name": "TeacherAdded",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 572,
+              "id": 711,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 571,
+                  "id": 710,
                   "indexed": true,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 573,
+                  "scope": 712,
                   "src": "337:23:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -191,7 +191,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 570,
+                    "id": 709,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "337:7:4",
@@ -212,20 +212,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 577,
+            "id": 716,
             "name": "TeacherRemoved",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 576,
+              "id": 715,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 575,
+                  "id": 714,
                   "indexed": true,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 577,
+                  "scope": 716,
                   "src": "387:23:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -234,7 +234,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 574,
+                    "id": 713,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "387:7:4",
@@ -254,26 +254,26 @@
           },
           {
             "constant": false,
-            "id": 579,
+            "id": 718,
             "name": "Teachers",
             "nodeType": "VariableDeclaration",
-            "scope": 667,
+            "scope": 806,
             "src": "499:27:4",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_Role_$476_storage",
+              "typeIdentifier": "t_struct$_Role_$615_storage",
               "typeString": "struct Roles.Role"
             },
             "typeName": {
               "contractScope": null,
-              "id": 578,
+              "id": 717,
               "name": "Roles.Role",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 476,
+              "referencedDeclaration": 615,
               "src": "499:10:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_Role_$476_storage_ptr",
+                "typeIdentifier": "t_struct$_Role_$615_storage_ptr",
                 "typeString": "struct Roles.Role"
               }
             },
@@ -282,7 +282,7 @@
           },
           {
             "body": {
-              "id": 587,
+              "id": 726,
               "nodeType": "Block",
               "src": "636:72:4",
               "statements": [
@@ -294,18 +294,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 583,
+                          "id": 722,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 682,
+                          "referencedDeclaration": 821,
                           "src": "691:3:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 584,
+                        "id": 723,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -327,18 +327,18 @@
                           "typeString": "address payable"
                         }
                       ],
-                      "id": 582,
+                      "id": 721,
                       "name": "_addTeacher",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 650,
+                      "referencedDeclaration": 789,
                       "src": "679:11:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 585,
+                    "id": 724,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -352,32 +352,32 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 586,
+                  "id": 725,
                   "nodeType": "ExpressionStatement",
                   "src": "679:23:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 588,
+            "id": 727,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 580,
+              "id": 719,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "627:2:4"
             },
             "returnParameters": {
-              "id": 581,
+              "id": 720,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "636:0:4"
             },
-            "scope": 667,
+            "scope": 806,
             "src": "616:92:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -385,7 +385,7 @@
           },
           {
             "body": {
-              "id": 598,
+              "id": 737,
               "nodeType": "Block",
               "src": "819:51:4",
               "statements": [
@@ -400,18 +400,18 @@
                             "argumentTypes": null,
                             "expression": {
                               "argumentTypes": null,
-                              "id": 592,
+                              "id": 731,
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 682,
+                              "referencedDeclaration": 821,
                               "src": "844:3:4",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
                                 "typeString": "msg"
                               }
                             },
-                            "id": 593,
+                            "id": 732,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -433,18 +433,18 @@
                               "typeString": "address payable"
                             }
                           ],
-                          "id": 591,
+                          "id": 730,
                           "name": "isTeacher",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 612,
+                          "referencedDeclaration": 751,
                           "src": "834:9:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view returns (bool)"
                           }
                         },
-                        "id": 594,
+                        "id": 733,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -466,21 +466,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 590,
+                      "id": 729,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        685,
-                        686
+                        824,
+                        825
                       ],
-                      "referencedDeclaration": 685,
+                      "referencedDeclaration": 824,
                       "src": "826:7:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 595,
+                    "id": 734,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -494,23 +494,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 596,
+                  "id": 735,
                   "nodeType": "ExpressionStatement",
                   "src": "826:30:4"
                 },
                 {
-                  "id": 597,
+                  "id": 736,
                   "nodeType": "PlaceholderStatement",
                   "src": "863:1:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 599,
+            "id": 738,
             "name": "onlyTeacher",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 589,
+              "id": 728,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "816:2:4"
@@ -520,7 +520,7 @@
           },
           {
             "body": {
-              "id": 611,
+              "id": 750,
               "nodeType": "Block",
               "src": "994:41:4",
               "statements": [
@@ -530,11 +530,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 608,
+                        "id": 747,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 601,
+                        "referencedDeclaration": 740,
                         "src": "1021:7:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -551,32 +551,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 606,
+                        "id": 745,
                         "name": "Teachers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 579,
+                        "referencedDeclaration": 718,
                         "src": "1008:8:4",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Role_$476_storage",
+                          "typeIdentifier": "t_struct$_Role_$615_storage",
                           "typeString": "struct Roles.Role storage ref"
                         }
                       },
-                      "id": 607,
+                      "id": 746,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "has",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 562,
+                      "referencedDeclaration": 701,
                       "src": "1008:12:4",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_struct$_Role_$476_storage_ptr_$_t_address_$returns$_t_bool_$bound_to$_t_struct$_Role_$476_storage_ptr_$",
+                        "typeIdentifier": "t_function_internal_view$_t_struct$_Role_$615_storage_ptr_$_t_address_$returns$_t_bool_$bound_to$_t_struct$_Role_$615_storage_ptr_$",
                         "typeString": "function (struct Roles.Role storage pointer,address) view returns (bool)"
                       }
                     },
-                    "id": 609,
+                    "id": 748,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -590,30 +590,30 @@
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 605,
-                  "id": 610,
+                  "functionReturnParameters": 744,
+                  "id": 749,
                   "nodeType": "Return",
                   "src": "1001:28:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 612,
+            "id": 751,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "isTeacher",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 602,
+              "id": 741,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 601,
+                  "id": 740,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 612,
+                  "scope": 751,
                   "src": "950:15:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -622,7 +622,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 600,
+                    "id": 739,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "950:7:4",
@@ -639,15 +639,15 @@
               "src": "949:17:4"
             },
             "returnParameters": {
-              "id": 605,
+              "id": 744,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 604,
+                  "id": 743,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 612,
+                  "scope": 751,
                   "src": "988:4:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -656,7 +656,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 603,
+                    "id": 742,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "988:4:4",
@@ -671,7 +671,7 @@
               ],
               "src": "987:6:4"
             },
-            "scope": 667,
+            "scope": 806,
             "src": "931:104:4",
             "stateMutability": "view",
             "superFunction": null,
@@ -679,7 +679,7 @@
           },
           {
             "body": {
-              "id": 623,
+              "id": 762,
               "nodeType": "Block",
               "src": "1154:33:4",
               "statements": [
@@ -689,11 +689,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 620,
+                        "id": 759,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 614,
+                        "referencedDeclaration": 753,
                         "src": "1173:7:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -708,18 +708,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 619,
+                      "id": 758,
                       "name": "_addTeacher",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 650,
+                      "referencedDeclaration": 789,
                       "src": "1161:11:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 621,
+                    "id": 760,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -733,27 +733,27 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 622,
+                  "id": 761,
                   "nodeType": "ExpressionStatement",
                   "src": "1161:20:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 624,
+            "id": 763,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 617,
+                "id": 756,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 616,
+                  "id": 755,
                   "name": "onlyTeacher",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 599,
+                  "referencedDeclaration": 738,
                   "src": "1142:11:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -767,15 +767,15 @@
             "name": "addTeacher",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 615,
+              "id": 754,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 614,
+                  "id": 753,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 624,
+                  "scope": 763,
                   "src": "1118:15:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -784,7 +784,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 613,
+                    "id": 752,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1118:7:4",
@@ -801,12 +801,12 @@
               "src": "1117:17:4"
             },
             "returnParameters": {
-              "id": 618,
+              "id": 757,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1154:0:4"
             },
-            "scope": 667,
+            "scope": 806,
             "src": "1098:89:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -814,7 +814,7 @@
           },
           {
             "body": {
-              "id": 633,
+              "id": 772,
               "nodeType": "Block",
               "src": "1306:36:4",
               "statements": [
@@ -824,11 +824,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 630,
+                        "id": 769,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 626,
+                        "referencedDeclaration": 765,
                         "src": "1328:7:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -843,18 +843,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 629,
+                      "id": 768,
                       "name": "_removeTeacher",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 666,
+                      "referencedDeclaration": 805,
                       "src": "1313:14:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 631,
+                    "id": 770,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -868,29 +868,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 632,
+                  "id": 771,
                   "nodeType": "ExpressionStatement",
                   "src": "1313:23:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 634,
+            "id": 773,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "renounceTeacher",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 627,
+              "id": 766,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 626,
+                  "id": 765,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 634,
+                  "scope": 773,
                   "src": "1282:15:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -899,7 +899,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 625,
+                    "id": 764,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1282:7:4",
@@ -916,12 +916,12 @@
               "src": "1281:17:4"
             },
             "returnParameters": {
-              "id": 628,
+              "id": 767,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1306:0:4"
             },
-            "scope": 667,
+            "scope": 806,
             "src": "1257:85:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -929,7 +929,7 @@
           },
           {
             "body": {
-              "id": 649,
+              "id": 788,
               "nodeType": "Block",
               "src": "1484:67:4",
               "statements": [
@@ -939,11 +939,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 642,
+                        "id": 781,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 636,
+                        "referencedDeclaration": 775,
                         "src": "1504:7:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -960,32 +960,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 639,
+                        "id": 778,
                         "name": "Teachers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 579,
+                        "referencedDeclaration": 718,
                         "src": "1491:8:4",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Role_$476_storage",
+                          "typeIdentifier": "t_struct$_Role_$615_storage",
                           "typeString": "struct Roles.Role storage ref"
                         }
                       },
-                      "id": 641,
+                      "id": 780,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "add",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 508,
+                      "referencedDeclaration": 647,
                       "src": "1491:12:4",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Role_$476_storage_ptr_$_t_address_$returns$__$bound_to$_t_struct$_Role_$476_storage_ptr_$",
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Role_$615_storage_ptr_$_t_address_$returns$__$bound_to$_t_struct$_Role_$615_storage_ptr_$",
                         "typeString": "function (struct Roles.Role storage pointer,address)"
                       }
                     },
-                    "id": 643,
+                    "id": 782,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -999,7 +999,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 644,
+                  "id": 783,
                   "nodeType": "ExpressionStatement",
                   "src": "1491:21:4"
                 },
@@ -1009,11 +1009,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 646,
+                        "id": 785,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 636,
+                        "referencedDeclaration": 775,
                         "src": "1537:7:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1028,18 +1028,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 645,
+                      "id": 784,
                       "name": "TeacherAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 573,
+                      "referencedDeclaration": 712,
                       "src": "1524:12:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 647,
+                    "id": 786,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1053,29 +1053,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 648,
+                  "id": 787,
                   "nodeType": "EmitStatement",
                   "src": "1519:26:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 650,
+            "id": 789,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_addTeacher",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 637,
+              "id": 776,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 636,
+                  "id": 775,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 650,
+                  "scope": 789,
                   "src": "1458:15:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1084,7 +1084,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 635,
+                    "id": 774,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1458:7:4",
@@ -1101,12 +1101,12 @@
               "src": "1457:17:4"
             },
             "returnParameters": {
-              "id": 638,
+              "id": 777,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1484:0:4"
             },
-            "scope": 667,
+            "scope": 806,
             "src": "1437:114:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1114,7 +1114,7 @@
           },
           {
             "body": {
-              "id": 665,
+              "id": 804,
               "nodeType": "Block",
               "src": "1705:72:4",
               "statements": [
@@ -1124,11 +1124,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 658,
+                        "id": 797,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 652,
+                        "referencedDeclaration": 791,
                         "src": "1728:7:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1145,32 +1145,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 655,
+                        "id": 794,
                         "name": "Teachers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 579,
+                        "referencedDeclaration": 718,
                         "src": "1712:8:4",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Role_$476_storage",
+                          "typeIdentifier": "t_struct$_Role_$615_storage",
                           "typeString": "struct Roles.Role storage ref"
                         }
                       },
-                      "id": 657,
+                      "id": 796,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "remove",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 539,
+                      "referencedDeclaration": 678,
                       "src": "1712:15:4",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Role_$476_storage_ptr_$_t_address_$returns$__$bound_to$_t_struct$_Role_$476_storage_ptr_$",
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Role_$615_storage_ptr_$_t_address_$returns$__$bound_to$_t_struct$_Role_$615_storage_ptr_$",
                         "typeString": "function (struct Roles.Role storage pointer,address)"
                       }
                     },
-                    "id": 659,
+                    "id": 798,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1184,7 +1184,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 660,
+                  "id": 799,
                   "nodeType": "ExpressionStatement",
                   "src": "1712:24:4"
                 },
@@ -1194,11 +1194,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 662,
+                        "id": 801,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 652,
+                        "referencedDeclaration": 791,
                         "src": "1763:7:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1213,18 +1213,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 661,
+                      "id": 800,
                       "name": "TeacherRemoved",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 577,
+                      "referencedDeclaration": 716,
                       "src": "1748:14:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 663,
+                    "id": 802,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1238,29 +1238,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 664,
+                  "id": 803,
                   "nodeType": "EmitStatement",
                   "src": "1743:28:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 666,
+            "id": 805,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_removeTeacher",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 653,
+              "id": 792,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 652,
+                  "id": 791,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 666,
+                  "scope": 805,
                   "src": "1679:15:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1269,7 +1269,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 651,
+                    "id": 790,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1679:7:4",
@@ -1286,19 +1286,19 @@
               "src": "1678:17:4"
             },
             "returnParameters": {
-              "id": 654,
+              "id": 793,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1705:0:4"
             },
-            "scope": 667,
+            "scope": 806,
             "src": "1655:122:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 668,
+        "scope": 807,
         "src": "199:1581:4"
       }
     ],
@@ -1309,7 +1309,7 @@
       "absolutePath": "project:/contracts/TeacherRole.sol",
       "exportedSymbols": {
         "TeacherRole": [
-          667
+          806
         ]
       }
     },
@@ -1323,22 +1323,22 @@
             ".24"
           ]
         },
-        "id": 565,
+        "id": 704,
         "name": "PragmaDirective",
         "src": "37:25:4"
       },
       {
         "attributes": {
-          "SourceUnit": 564,
+          "SourceUnit": 703,
           "absolutePath": "project:/contracts/Roles.sol",
           "file": "./Roles.sol",
-          "scope": 668,
+          "scope": 807,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 566,
+        "id": 705,
         "name": "ImportDirective",
         "src": "97:21:4"
       },
@@ -1354,10 +1354,10 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            667
+            806
           ],
           "name": "TeacherRole",
-          "scope": 668
+          "scope": 807
         },
         "children": [
           {
@@ -1366,10 +1366,10 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "Roles",
-                  "referencedDeclaration": 563,
+                  "referencedDeclaration": 702,
                   "type": "library Roles"
                 },
-                "id": 567,
+                "id": 706,
                 "name": "UserDefinedTypeName",
                 "src": "231:5:4"
               },
@@ -1377,15 +1377,15 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "Roles.Role",
-                  "referencedDeclaration": 476,
+                  "referencedDeclaration": 615,
                   "type": "struct Roles.Role"
                 },
-                "id": 568,
+                "id": 707,
                 "name": "UserDefinedTypeName",
                 "src": "241:10:4"
               }
             ],
-            "id": 569,
+            "id": 708,
             "name": "UsingForDirective",
             "src": "225:27:4"
           },
@@ -1403,7 +1403,7 @@
                       "constant": false,
                       "indexed": true,
                       "name": "account",
-                      "scope": 573,
+                      "scope": 712,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1417,22 +1417,22 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 570,
+                        "id": 709,
                         "name": "ElementaryTypeName",
                         "src": "337:7:4"
                       }
                     ],
-                    "id": 571,
+                    "id": 710,
                     "name": "VariableDeclaration",
                     "src": "337:23:4"
                   }
                 ],
-                "id": 572,
+                "id": 711,
                 "name": "ParameterList",
                 "src": "336:25:4"
               }
             ],
-            "id": 573,
+            "id": 712,
             "name": "EventDefinition",
             "src": "318:44:4"
           },
@@ -1450,7 +1450,7 @@
                       "constant": false,
                       "indexed": true,
                       "name": "account",
-                      "scope": 577,
+                      "scope": 716,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1464,22 +1464,22 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 574,
+                        "id": 713,
                         "name": "ElementaryTypeName",
                         "src": "387:7:4"
                       }
                     ],
-                    "id": 575,
+                    "id": 714,
                     "name": "VariableDeclaration",
                     "src": "387:23:4"
                   }
                 ],
-                "id": 576,
+                "id": 715,
                 "name": "ParameterList",
                 "src": "386:25:4"
               }
             ],
-            "id": 577,
+            "id": 716,
             "name": "EventDefinition",
             "src": "366:46:4"
           },
@@ -1487,7 +1487,7 @@
             "attributes": {
               "constant": false,
               "name": "Teachers",
-              "scope": 667,
+              "scope": 806,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "struct Roles.Role",
@@ -1499,15 +1499,15 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "Roles.Role",
-                  "referencedDeclaration": 476,
+                  "referencedDeclaration": 615,
                   "type": "struct Roles.Role"
                 },
-                "id": 578,
+                "id": 717,
                 "name": "UserDefinedTypeName",
                 "src": "499:10:4"
               }
             ],
-            "id": 579,
+            "id": 718,
             "name": "VariableDeclaration",
             "src": "499:27:4"
           },
@@ -1521,7 +1521,7 @@
                 null
               ],
               "name": "",
-              "scope": 667,
+              "scope": 806,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -1534,7 +1534,7 @@
                   ]
                 },
                 "children": [],
-                "id": 580,
+                "id": 719,
                 "name": "ParameterList",
                 "src": "627:2:4"
               },
@@ -1545,7 +1545,7 @@
                   ]
                 },
                 "children": [],
-                "id": 581,
+                "id": 720,
                 "name": "ParameterList",
                 "src": "636:0:4"
               },
@@ -1579,11 +1579,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 650,
+                              "referencedDeclaration": 789,
                               "type": "function (address)",
                               "value": "_addTeacher"
                             },
-                            "id": 582,
+                            "id": 721,
                             "name": "Identifier",
                             "src": "679:11:4"
                           },
@@ -1605,36 +1605,36 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 682,
+                                  "referencedDeclaration": 821,
                                   "type": "msg",
                                   "value": "msg"
                                 },
-                                "id": 583,
+                                "id": 722,
                                 "name": "Identifier",
                                 "src": "691:3:4"
                               }
                             ],
-                            "id": 584,
+                            "id": 723,
                             "name": "MemberAccess",
                             "src": "691:10:4"
                           }
                         ],
-                        "id": 585,
+                        "id": 724,
                         "name": "FunctionCall",
                         "src": "679:23:4"
                       }
                     ],
-                    "id": 586,
+                    "id": 725,
                     "name": "ExpressionStatement",
                     "src": "679:23:4"
                   }
                 ],
-                "id": 587,
+                "id": 726,
                 "name": "Block",
                 "src": "636:72:4"
               }
             ],
-            "id": 588,
+            "id": 727,
             "name": "FunctionDefinition",
             "src": "616:92:4"
           },
@@ -1652,7 +1652,7 @@
                   ]
                 },
                 "children": [],
-                "id": 589,
+                "id": 728,
                 "name": "ParameterList",
                 "src": "816:2:4"
               },
@@ -1684,14 +1684,14 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                685,
-                                686
+                                824,
+                                825
                               ],
-                              "referencedDeclaration": 685,
+                              "referencedDeclaration": 824,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
-                            "id": 590,
+                            "id": 729,
                             "name": "Identifier",
                             "src": "826:7:4"
                           },
@@ -1721,11 +1721,11 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 612,
+                                  "referencedDeclaration": 751,
                                   "type": "function (address) view returns (bool)",
                                   "value": "isTeacher"
                                 },
-                                "id": 591,
+                                "id": 730,
                                 "name": "Identifier",
                                 "src": "834:9:4"
                               },
@@ -1747,46 +1747,46 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 682,
+                                      "referencedDeclaration": 821,
                                       "type": "msg",
                                       "value": "msg"
                                     },
-                                    "id": 592,
+                                    "id": 731,
                                     "name": "Identifier",
                                     "src": "844:3:4"
                                   }
                                 ],
-                                "id": 593,
+                                "id": 732,
                                 "name": "MemberAccess",
                                 "src": "844:10:4"
                               }
                             ],
-                            "id": 594,
+                            "id": 733,
                             "name": "FunctionCall",
                             "src": "834:21:4"
                           }
                         ],
-                        "id": 595,
+                        "id": 734,
                         "name": "FunctionCall",
                         "src": "826:30:4"
                       }
                     ],
-                    "id": 596,
+                    "id": 735,
                     "name": "ExpressionStatement",
                     "src": "826:30:4"
                   },
                   {
-                    "id": 597,
+                    "id": 736,
                     "name": "PlaceholderStatement",
                     "src": "863:1:4"
                   }
                 ],
-                "id": 598,
+                "id": 737,
                 "name": "Block",
                 "src": "819:51:4"
               }
             ],
-            "id": 599,
+            "id": 738,
             "name": "ModifierDefinition",
             "src": "796:74:4"
           },
@@ -1800,7 +1800,7 @@
                 null
               ],
               "name": "isTeacher",
-              "scope": 667,
+              "scope": 806,
               "stateMutability": "view",
               "superFunction": null,
               "visibility": "public"
@@ -1812,7 +1812,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "account",
-                      "scope": 612,
+                      "scope": 751,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1826,17 +1826,17 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 600,
+                        "id": 739,
                         "name": "ElementaryTypeName",
                         "src": "950:7:4"
                       }
                     ],
-                    "id": 601,
+                    "id": 740,
                     "name": "VariableDeclaration",
                     "src": "950:15:4"
                   }
                 ],
-                "id": 602,
+                "id": 741,
                 "name": "ParameterList",
                 "src": "949:17:4"
               },
@@ -1846,7 +1846,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 612,
+                      "scope": 751,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "bool",
@@ -1859,17 +1859,17 @@
                           "name": "bool",
                           "type": "bool"
                         },
-                        "id": 603,
+                        "id": 742,
                         "name": "ElementaryTypeName",
                         "src": "988:4:4"
                       }
                     ],
-                    "id": 604,
+                    "id": 743,
                     "name": "VariableDeclaration",
                     "src": "988:4:4"
                   }
                 ],
-                "id": 605,
+                "id": 744,
                 "name": "ParameterList",
                 "src": "987:6:4"
               },
@@ -1877,7 +1877,7 @@
                 "children": [
                   {
                     "attributes": {
-                      "functionReturnParameters": 605
+                      "functionReturnParameters": 744
                     },
                     "children": [
                       {
@@ -1908,7 +1908,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "has",
-                              "referencedDeclaration": 562,
+                              "referencedDeclaration": 701,
                               "type": "function (struct Roles.Role storage pointer,address) view returns (bool)"
                             },
                             "children": [
@@ -1918,16 +1918,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 579,
+                                  "referencedDeclaration": 718,
                                   "type": "struct Roles.Role storage ref",
                                   "value": "Teachers"
                                 },
-                                "id": 606,
+                                "id": 745,
                                 "name": "Identifier",
                                 "src": "1008:8:4"
                               }
                             ],
-                            "id": 607,
+                            "id": 746,
                             "name": "MemberAccess",
                             "src": "1008:12:4"
                           },
@@ -1937,31 +1937,31 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 601,
+                              "referencedDeclaration": 740,
                               "type": "address",
                               "value": "account"
                             },
-                            "id": 608,
+                            "id": 747,
                             "name": "Identifier",
                             "src": "1021:7:4"
                           }
                         ],
-                        "id": 609,
+                        "id": 748,
                         "name": "FunctionCall",
                         "src": "1008:21:4"
                       }
                     ],
-                    "id": 610,
+                    "id": 749,
                     "name": "Return",
                     "src": "1001:28:4"
                   }
                 ],
-                "id": 611,
+                "id": 750,
                 "name": "Block",
                 "src": "994:41:4"
               }
             ],
-            "id": 612,
+            "id": 751,
             "name": "FunctionDefinition",
             "src": "931:104:4"
           },
@@ -1972,7 +1972,7 @@
               "isConstructor": false,
               "kind": "function",
               "name": "addTeacher",
-              "scope": 667,
+              "scope": 806,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -1984,7 +1984,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "account",
-                      "scope": 624,
+                      "scope": 763,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1998,17 +1998,17 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 613,
+                        "id": 752,
                         "name": "ElementaryTypeName",
                         "src": "1118:7:4"
                       }
                     ],
-                    "id": 614,
+                    "id": 753,
                     "name": "VariableDeclaration",
                     "src": "1118:15:4"
                   }
                 ],
-                "id": 615,
+                "id": 754,
                 "name": "ParameterList",
                 "src": "1117:17:4"
               },
@@ -2019,7 +2019,7 @@
                   ]
                 },
                 "children": [],
-                "id": 618,
+                "id": 757,
                 "name": "ParameterList",
                 "src": "1154:0:4"
               },
@@ -2034,16 +2034,16 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 599,
+                      "referencedDeclaration": 738,
                       "type": "modifier ()",
                       "value": "onlyTeacher"
                     },
-                    "id": 616,
+                    "id": 755,
                     "name": "Identifier",
                     "src": "1142:11:4"
                   }
                 ],
-                "id": 617,
+                "id": 756,
                 "name": "ModifierInvocation",
                 "src": "1142:11:4"
               },
@@ -2077,11 +2077,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 650,
+                              "referencedDeclaration": 789,
                               "type": "function (address)",
                               "value": "_addTeacher"
                             },
-                            "id": 619,
+                            "id": 758,
                             "name": "Identifier",
                             "src": "1161:11:4"
                           },
@@ -2091,31 +2091,31 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 614,
+                              "referencedDeclaration": 753,
                               "type": "address",
                               "value": "account"
                             },
-                            "id": 620,
+                            "id": 759,
                             "name": "Identifier",
                             "src": "1173:7:4"
                           }
                         ],
-                        "id": 621,
+                        "id": 760,
                         "name": "FunctionCall",
                         "src": "1161:20:4"
                       }
                     ],
-                    "id": 622,
+                    "id": 761,
                     "name": "ExpressionStatement",
                     "src": "1161:20:4"
                   }
                 ],
-                "id": 623,
+                "id": 762,
                 "name": "Block",
                 "src": "1154:33:4"
               }
             ],
-            "id": 624,
+            "id": 763,
             "name": "FunctionDefinition",
             "src": "1098:89:4"
           },
@@ -2129,7 +2129,7 @@
                 null
               ],
               "name": "renounceTeacher",
-              "scope": 667,
+              "scope": 806,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -2141,7 +2141,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "account",
-                      "scope": 634,
+                      "scope": 773,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -2155,17 +2155,17 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 625,
+                        "id": 764,
                         "name": "ElementaryTypeName",
                         "src": "1282:7:4"
                       }
                     ],
-                    "id": 626,
+                    "id": 765,
                     "name": "VariableDeclaration",
                     "src": "1282:15:4"
                   }
                 ],
-                "id": 627,
+                "id": 766,
                 "name": "ParameterList",
                 "src": "1281:17:4"
               },
@@ -2176,7 +2176,7 @@
                   ]
                 },
                 "children": [],
-                "id": 628,
+                "id": 767,
                 "name": "ParameterList",
                 "src": "1306:0:4"
               },
@@ -2210,11 +2210,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 666,
+                              "referencedDeclaration": 805,
                               "type": "function (address)",
                               "value": "_removeTeacher"
                             },
-                            "id": 629,
+                            "id": 768,
                             "name": "Identifier",
                             "src": "1313:14:4"
                           },
@@ -2224,31 +2224,31 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 626,
+                              "referencedDeclaration": 765,
                               "type": "address",
                               "value": "account"
                             },
-                            "id": 630,
+                            "id": 769,
                             "name": "Identifier",
                             "src": "1328:7:4"
                           }
                         ],
-                        "id": 631,
+                        "id": 770,
                         "name": "FunctionCall",
                         "src": "1313:23:4"
                       }
                     ],
-                    "id": 632,
+                    "id": 771,
                     "name": "ExpressionStatement",
                     "src": "1313:23:4"
                   }
                 ],
-                "id": 633,
+                "id": 772,
                 "name": "Block",
                 "src": "1306:36:4"
               }
             ],
-            "id": 634,
+            "id": 773,
             "name": "FunctionDefinition",
             "src": "1257:85:4"
           },
@@ -2262,7 +2262,7 @@
                 null
               ],
               "name": "_addTeacher",
-              "scope": 667,
+              "scope": 806,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "internal"
@@ -2274,7 +2274,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "account",
-                      "scope": 650,
+                      "scope": 789,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -2288,17 +2288,17 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 635,
+                        "id": 774,
                         "name": "ElementaryTypeName",
                         "src": "1458:7:4"
                       }
                     ],
-                    "id": 636,
+                    "id": 775,
                     "name": "VariableDeclaration",
                     "src": "1458:15:4"
                   }
                 ],
-                "id": 637,
+                "id": 776,
                 "name": "ParameterList",
                 "src": "1457:17:4"
               },
@@ -2309,7 +2309,7 @@
                   ]
                 },
                 "children": [],
-                "id": 638,
+                "id": 777,
                 "name": "ParameterList",
                 "src": "1484:0:4"
               },
@@ -2345,7 +2345,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "add",
-                              "referencedDeclaration": 508,
+                              "referencedDeclaration": 647,
                               "type": "function (struct Roles.Role storage pointer,address)"
                             },
                             "children": [
@@ -2355,16 +2355,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 579,
+                                  "referencedDeclaration": 718,
                                   "type": "struct Roles.Role storage ref",
                                   "value": "Teachers"
                                 },
-                                "id": 639,
+                                "id": 778,
                                 "name": "Identifier",
                                 "src": "1491:8:4"
                               }
                             ],
-                            "id": 641,
+                            "id": 780,
                             "name": "MemberAccess",
                             "src": "1491:12:4"
                           },
@@ -2374,21 +2374,21 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 636,
+                              "referencedDeclaration": 775,
                               "type": "address",
                               "value": "account"
                             },
-                            "id": 642,
+                            "id": 781,
                             "name": "Identifier",
                             "src": "1504:7:4"
                           }
                         ],
-                        "id": 643,
+                        "id": 782,
                         "name": "FunctionCall",
                         "src": "1491:21:4"
                       }
                     ],
-                    "id": 644,
+                    "id": 783,
                     "name": "ExpressionStatement",
                     "src": "1491:21:4"
                   },
@@ -2420,11 +2420,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 573,
+                              "referencedDeclaration": 712,
                               "type": "function (address)",
                               "value": "TeacherAdded"
                             },
-                            "id": 645,
+                            "id": 784,
                             "name": "Identifier",
                             "src": "1524:12:4"
                           },
@@ -2434,31 +2434,31 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 636,
+                              "referencedDeclaration": 775,
                               "type": "address",
                               "value": "account"
                             },
-                            "id": 646,
+                            "id": 785,
                             "name": "Identifier",
                             "src": "1537:7:4"
                           }
                         ],
-                        "id": 647,
+                        "id": 786,
                         "name": "FunctionCall",
                         "src": "1524:21:4"
                       }
                     ],
-                    "id": 648,
+                    "id": 787,
                     "name": "EmitStatement",
                     "src": "1519:26:4"
                   }
                 ],
-                "id": 649,
+                "id": 788,
                 "name": "Block",
                 "src": "1484:67:4"
               }
             ],
-            "id": 650,
+            "id": 789,
             "name": "FunctionDefinition",
             "src": "1437:114:4"
           },
@@ -2472,7 +2472,7 @@
                 null
               ],
               "name": "_removeTeacher",
-              "scope": 667,
+              "scope": 806,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "internal"
@@ -2484,7 +2484,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "account",
-                      "scope": 666,
+                      "scope": 805,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -2498,17 +2498,17 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 651,
+                        "id": 790,
                         "name": "ElementaryTypeName",
                         "src": "1679:7:4"
                       }
                     ],
-                    "id": 652,
+                    "id": 791,
                     "name": "VariableDeclaration",
                     "src": "1679:15:4"
                   }
                 ],
-                "id": 653,
+                "id": 792,
                 "name": "ParameterList",
                 "src": "1678:17:4"
               },
@@ -2519,7 +2519,7 @@
                   ]
                 },
                 "children": [],
-                "id": 654,
+                "id": 793,
                 "name": "ParameterList",
                 "src": "1705:0:4"
               },
@@ -2555,7 +2555,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "remove",
-                              "referencedDeclaration": 539,
+                              "referencedDeclaration": 678,
                               "type": "function (struct Roles.Role storage pointer,address)"
                             },
                             "children": [
@@ -2565,16 +2565,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 579,
+                                  "referencedDeclaration": 718,
                                   "type": "struct Roles.Role storage ref",
                                   "value": "Teachers"
                                 },
-                                "id": 655,
+                                "id": 794,
                                 "name": "Identifier",
                                 "src": "1712:8:4"
                               }
                             ],
-                            "id": 657,
+                            "id": 796,
                             "name": "MemberAccess",
                             "src": "1712:15:4"
                           },
@@ -2584,21 +2584,21 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 652,
+                              "referencedDeclaration": 791,
                               "type": "address",
                               "value": "account"
                             },
-                            "id": 658,
+                            "id": 797,
                             "name": "Identifier",
                             "src": "1728:7:4"
                           }
                         ],
-                        "id": 659,
+                        "id": 798,
                         "name": "FunctionCall",
                         "src": "1712:24:4"
                       }
                     ],
-                    "id": 660,
+                    "id": 799,
                     "name": "ExpressionStatement",
                     "src": "1712:24:4"
                   },
@@ -2630,11 +2630,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 577,
+                              "referencedDeclaration": 716,
                               "type": "function (address)",
                               "value": "TeacherRemoved"
                             },
-                            "id": 661,
+                            "id": 800,
                             "name": "Identifier",
                             "src": "1748:14:4"
                           },
@@ -2644,41 +2644,41 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 652,
+                              "referencedDeclaration": 791,
                               "type": "address",
                               "value": "account"
                             },
-                            "id": 662,
+                            "id": 801,
                             "name": "Identifier",
                             "src": "1763:7:4"
                           }
                         ],
-                        "id": 663,
+                        "id": 802,
                         "name": "FunctionCall",
                         "src": "1748:23:4"
                       }
                     ],
-                    "id": 664,
+                    "id": 803,
                     "name": "EmitStatement",
                     "src": "1743:28:4"
                   }
                 ],
-                "id": 665,
+                "id": 804,
                 "name": "Block",
                 "src": "1705:72:4"
               }
             ],
-            "id": 666,
+            "id": 805,
             "name": "FunctionDefinition",
             "src": "1655:122:4"
           }
         ],
-        "id": 667,
+        "id": 806,
         "name": "ContractDefinition",
         "src": "199:1581:4"
       }
     ],
-    "id": 668,
+    "id": 807,
     "name": "SourceUnit",
     "src": "37:1743:4"
   },
@@ -2688,7 +2688,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-10-16T02:15:03.958Z",
+  "updatedAt": "2023-10-31T15:16:19.133Z",
   "devdoc": {
     "methods": {}
   },

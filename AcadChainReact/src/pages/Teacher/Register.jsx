@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 
-function Register({setTeacherRegistrationData}) {
+function Register({contract}) {
   // Initialize state
   const [teacherCode, setTeacherCode] = useState("");
   const [subjectCodes, setSubjectCodes] = useState("");
@@ -18,17 +18,14 @@ function Register({setTeacherRegistrationData}) {
 
     const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
     const userAddress = accounts[0];
-
     
-    const registrationData = {
-      userAddress: userAddress,
-      teacherCode: teacherCode,
-      subjectCodes: subjectCodes,
-      studentCounts: studentCounts,
-    };
-
-    setTeacherRegistrationData(registrationData);
-    
+    await contract.methods.storeTeacherRegistrationData(
+      userAddress,
+      teacherCode,
+      subjectCodes,
+      studentCounts
+    ).send({ from: userAddress });
+  
     console.log("Ths is registration data", registrationData);
   };
  

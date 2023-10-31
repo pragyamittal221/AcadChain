@@ -29,14 +29,16 @@ contract('AcadChainContract', (accounts) => {
     });
     // Checks function: getReview and addReview
     it("should retrieve the review added", async () => {
-        const added = await instance.addTeacher("Anand1",["CSE01","CSE02"],[5,3]);
+        await instance.addTeacher("Anand1",["CSE01","CSE02"],[5,3]);
         const password = await instance.getPasswords("Anand1", "CSE01");
-        const review = await instance.addReview("Anand1", "CSE01", 4, "Great Teacher!", password[0]);
+        const ratings = ["4", "4", "4", "4", "4"];
+        await instance.addReview("Anand1", "CSE01", ratings, "Great Teacher!", password[0]);
         const checkReview = await instance.getReview("Anand1", "CSE01");
         assert.equal(checkReview.length, 1, "Review count should be 1");
-        assert.equal(checkReview[0].rating, 4, "Rating should match");
+        assert.deepEqual(checkReview[0].ratings, ratings, "Ratings should match");
         assert.equal(checkReview[0].comments, "Great Teacher!", "Comments should match");
-    });    
+    });
+    
 });
 
 

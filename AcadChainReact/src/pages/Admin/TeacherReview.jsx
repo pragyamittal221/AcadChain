@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-function TeacherReview({contract, teacherRegistrationData}) {
+function TeacherReview({contract}) {
   const [reviews, setReviews] = useState([]);
   const [toRemove, setToRemove] = useState([]);
+  const [teacherRegistrationData, setTeacherRegistrationData] = useState([]);
+
+  useEffect(() => {
+    const fetchTeacherRegistrationData = async () => {
+      const data = await contract.methods.getTeacherRegistrationData().call();
+      console.log("teacherRegstrationData from Admin.jsx", data); 
+      setTeacherRegistrationData(data);
+    };
+
+    fetchTeacherRegistrationData();
+  }, []);
 
   const handleReview = async (teacher, subject, decision) => {
     const newReview = {
@@ -48,6 +59,21 @@ function TeacherReview({contract, teacherRegistrationData}) {
     }
   }
 
+  if (decision === "Approve" || decision === "Reject") {
+    try {
+        // Get the user's account address
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const adminAddress = accounts[0];
+
+        // Call the deleteTeacherRegistrationData function in your contract
+        await contract.methods.deleteTeacherRegistrationData(teacher.teacherCode).send({ from: adminAddress });
+
+        alert('Teacher data deleted successfully!');
+    } catch (error) {
+        console.error('An error occurred:', error);
+        alert('Failed to delete teacher data. Please try again.');
+    }
+}
 
     // Set a timer to remove the review data after 3 seconds
     setTimeout(() => {

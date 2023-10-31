@@ -1,11 +1,11 @@
 import React from "react";
 import Register from "./Register";
 
-function TeacherNotApproved({setTeacherRegistrationData}) {
+function TeacherNotApproved({contract}) {
   return (
     <div className="">
       Teacher
-      <Register setTeacherRegistrationData={setTeacherRegistrationData}/>
+      <Register contract={contract}/>
     </div>
   );
 }
