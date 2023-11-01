@@ -5,3 +5,18 @@ git branch -M main
 git remote add origin https://github.com/pragyamittal221/acadChainDapp.git
 git push -u origin main
 git pull origin main
+
+
+
+Create a new repo
+Add a README
+Create a repo
+Copy code link 
+
+git clone <link>
+
+git add .
+git commit -m "comment"
+git push
+
+git pull 
