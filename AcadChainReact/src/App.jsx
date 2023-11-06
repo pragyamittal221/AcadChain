@@ -39,13 +39,14 @@ function App() {
     }
   };
 
+
+  // Update the contract address everytime the contract is deployed afresh.
   const connectContract = async (selectedAccount) => {
     const web3 = new Web3(window.ethereum);
     const contractInstance = new web3.eth.Contract(AcadChainContract.abi, "0x99aBdeD799479Aa68B2cf3ff280AEf98926f1e68");
 
     setContract(contractInstance);
   };
-
 
   return (
     <div>

@@ -1,19 +1,24 @@
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/pragyamittal221/acadChainDapp.git
-git push -u origin main
-git pull origin main
+***************************************************
 
+****************git init
+		git add README.md
+		git commit -m "first commit"
+		git branch -M main
+		git remote add origin https://github.com/pragyamittal221/acadChainDapp.git
+		git push -u origin main
+****************git pull origin main
+
+*****************Not recommended*******************
 
 
 Create a new repo
 Add a README
 Create a repo
-Copy code link 
 
-git clone <link>
+<if you just want to contribute, start here ->
+Copy code link from: code (bright green button) -> local -> https link
+
+git clone <paste link>
 
 git add .
 git commit -m "comment"
