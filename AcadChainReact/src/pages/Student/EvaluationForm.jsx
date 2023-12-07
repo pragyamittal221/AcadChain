@@ -8,14 +8,14 @@ function EvaluationForm({ formData, handleRatingChange }) {
   ];
 
   return (
-    <div className="p-4 rounded-lg mt-4 bg-white ">
+    <div className="p-4 rounded-lg mt-4 bg-white text-black">
       <h2 className="text-2xl font-bold mb-6 text-center">Evaluation</h2>
       {Object.keys(formData).map((rowKey) => (
         <div key={rowKey} className="mb-4 p-2 ">
           <span className="font-semibold block mb-2">
             {formData[rowKey].text}
           </span>
-          <div className="flex justify-between items-center space-x-4">
+          <div className="flex justify-between items-center space-x-6">
             {ratingsOptions.map((option) => (
               <label
                 key={option}

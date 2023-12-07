@@ -16,7 +16,8 @@ function GetReviews() {
   };
  
   return (
-    <Card color="transparent" shadow={false}>
+    <div className="flex justify-center bg-gray-100 pt-12">
+    <Card color="white" className="w-full max-w-2xl mx-auto p-10 bg-white rounded-xl shadow-md items-center">
       <Typography variant="h4" color="blue-gray">
         Get Reviews
       </Typography>
@@ -24,6 +25,7 @@ function GetReviews() {
       <form
         className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
         onSubmit={handleSubmit}
+        style={{width:'491px'}}
       >
         <div className="mb-4 flex flex-col gap-6">
           <Input
@@ -39,11 +41,14 @@ function GetReviews() {
             onChange={(e) => setSubjectCode(e.target.value)}
           />
         </div>
-        <Button type="submit" className="mt-6" fullWidth>
+        <div className="flex justify-center">
+        <Button type="submit" className="mt-4 w-48 bg-blue-900  hover:bg-gray-700">
           Get Reviews
         </Button>
+        </div>
       </form>
     </Card>
+    </div>
   );
 }
 

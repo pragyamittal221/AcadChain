@@ -2,15 +2,15 @@ import React from "react";
 import GetTeacher from "./Get-Teacher";
 import GetPassword from "./Get-Password";
 import GetReviews from "./Get-Review";
-import Register from "./Register";
+import IPFSRetriever from "../Student/IPFSRetriever";
 
 function Teacher() {
   return (
-    <div className="">
-      Teacher
+    <div className="bg-gray-100 pb-14">
       <GetTeacher />
       <GetPassword />
       <GetReviews />
+      <IPFSRetriever />
     </div>
   );
 }

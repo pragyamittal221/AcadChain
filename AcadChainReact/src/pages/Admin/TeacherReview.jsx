@@ -87,7 +87,8 @@ function TeacherReview({contract}) {
   }, [reviews]);
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-8 space-y-4">
+      teacher request approve/reject
       {teacherRegistrationData.map((teacher) => {
         if (toRemove.some((r) => r.teacherCode === teacher.teacherCode)) {
           return null; // Don't render this teacher's data if marked for removal

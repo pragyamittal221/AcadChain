@@ -48,10 +48,7 @@ function StudentForm({ contract }) {
     }
     console.log("Form Data:", formData);
     setIsSubmitted(true);
-    console.log("here1");
     const ratings = Object.values(formData.ratings).map(ratingData => ratingData.rating);
-    console.log("here2");
-    console.log("here3");
     if (contract) {
       const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
       const selectedAccount = accounts[0];
@@ -76,48 +73,48 @@ function StudentForm({ contract }) {
   };
 
   return (
-    <div className="">
-      <Card color="transparent" shadow={false}>
-        <Typography variant="h4" color="blue-gray">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 pt-12 ">
+      <Card color="white" className="w-full max-w-2xl mx-auto p-10 bg-white rounded-xl shadow-md items-center" >
+        <Typography variant="h4" color="black" className="text-center">
           Add Review
         </Typography>
         <Typography color="gray" className="mt-1 font-normal"></Typography>
         <form
-          onSubmit={handleSubmit}
-          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
-        >
-          <div className="mb-4 flex flex-col gap-6">
-            <Input
-              size="lg"
-              label="Password"
-              onChange={(e) => handleInputChange("password", e.target.value)}
-            />
-            <Input
-              size="lg"
-              label="Teacher Code"
-              onChange={(e) => handleInputChange("teacherCode", e.target.value)}
-            />
-            <Input
-              size="lg"
-              label="Subject Code"
-              onChange={(e) => handleInputChange("subjectCode", e.target.value)}
-            />
+  onSubmit={handleSubmit}
+  className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 flex justify-center"
+>
+  <div className="mb-4 flex flex-col gap-6 items-center">
+    <Input
+      size="lg"
+      label="Password"
+      onChange={(e) => handleInputChange("password", e.target.value)}
+    />
+    <Input
+      size="lg"
+      label="Teacher Code"
+      onChange={(e) => handleInputChange("teacherCode", e.target.value)}
+    />
+    <Input
+      size="lg"
+      label="Subject Code"
+      onChange={(e) => handleInputChange("subjectCode", e.target.value)}
+    />
 
-            <EvaluationForm
-              formData={formData.ratings}
-              handleRatingChange={handleRatingChange}
-            />
-            <div className="w-96">
-              <Textarea
-                label="Comment"
-                onChange={(e) => handleInputChange("comment", e.target.value)}
-              />
-            </div>
-          </div>
-          <Button className="mt-6" fullWidth type="submit" disabled={isSubmitted}>
+      <EvaluationForm
+        formData={formData.ratings}
+        handleRatingChange={handleRatingChange}
+      />
+    <div className="w-full">
+      <Textarea
+        label="Comments"
+        onChange={(e) => handleInputChange("comment", e.target.value)}
+      />
+    </div>
+          <Button className="mt-6 w-48 bg-blue-900  hover:bg-gray-700" type="submit" disabled={isSubmitted}>
             Submit
           </Button>
-        </form>
+  </div>
+</form>
       </Card>
     </div>
   );

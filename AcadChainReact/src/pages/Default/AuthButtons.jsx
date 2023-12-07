@@ -25,16 +25,16 @@ function AuthButtons({handleConnectWallet}) {
           I am a..
         </h3>
         <div className="">
-          <Button ripple={true} className="m-2">
+          <Button ripple={true}  className="m-2 bg-blue-900 hover:bg-gray-700">
             <Link to="/student">Student</Link>
           </Button>
-          <Button ripple={true} className="m-2">
+          <Button ripple={true} className="m-2 bg-blue-900 hover:bg-gray-700">
             <Link to="/teacher">Teacher</Link>
           </Button>
-          <Button ripple={true} className="m-2">
+          <Button ripple={true} className="m-2 bg-blue-900 hover:bg-gray-700">
             <Link to="/admin">Admin</Link>
           </Button>
-          <Button ripple={true} className="m-2">
+          <Button ripple={true} className="m-2 bg-blue-900 hover:bg-gray-700">
             <Link to="/teachernotapproved">Teacher not approved</Link>
           </Button>
         </div>

@@ -10,8 +10,10 @@ import Web3 from "web3";
 import AcadChainContract from "./AcadChainContract.json";
 
 function App() {
+
   const [account, setAccount] = useState("0x0");
   const [contract, setContract] = useState(null);
+  const [isTeacher, setIsTeacher] = useState(false);
   
   useEffect(() => {
     if (window.ethereum) {
@@ -33,12 +35,13 @@ function App() {
         const selectedAccount = accounts[0];
         setAccount(selectedAccount);
         connectContract(selectedAccount);
+        const isTeacher = await contract.methods.isTeacher(selectedAccount).call();
+        setIsTeacher(isTeacher);
       } catch (error) {
         console.error(error);
       }
     }
   };
-
 
   // Update the contract address everytime the contract is deployed afresh.
   const connectContract = async (selectedAccount) => {
@@ -56,6 +59,7 @@ function App() {
           <Route path="/" element={<Default handleConnectWallet={handleConnectWallet}/>} />
           <Route path="/admin" element={<Admin contract={contract} />} />
           <Route path="/student" element={<Student contract={contract}/>} />
+          {/* <Route path="/teacher" element={isTeacher ? <Teacher /> : <TeacherNotApproved contract={contract}/>} /> */}
           <Route path="/teacher" element={<Teacher />} />
           <Route path="/teachernotapproved" element={<TeacherNotApproved contract={contract}/>} />
         </Routes>
