@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.4.24;
+pragma solidity >=0.8.2 <0.9.0;
 
 // Import the library 'Roles'
 import "./Roles.sol";
@@ -14,7 +14,7 @@ contract TeacherRole {
   // Define a struct 'Teachers' by inheriting from 'Roles' library, struct Role
   Roles.Role private Teachers;
   // In the constructor make the address that deploys this contract the 1st Teacher
-  constructor() public{
+  constructor() {
     //_addConstructor(msg.sender);
     _addTeacher(msg.sender);
   }

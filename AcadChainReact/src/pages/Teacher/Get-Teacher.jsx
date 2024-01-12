@@ -1,16 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import { useContract, useUserAddress } from "../../connectContract";
 
 function GetTeacher() {
   // Initialize state
   const [teacherCode, setTeacherCode] = useState("");
+  const [teacherData, setTeacherData] = useState(null);
+  
+  const contract = useContract();
+  const userAddress = useUserAddress();
+
+
+  useEffect(() => {
+    if (contract) {
+      console.log('Contract instance:', contract);
+      console.log('User Address:', userAddress);
+    }
+  }, [contract]);
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      teacherCode: teacherCode,
-    });
+    if (!teacherCode) {
+      alert("Please enter the teacher code before submitting.");
+      return;
+    }
+
+    try {
+      // Call the getTeacher function from the smart contract
+      const data = await contract.methods.getTeacher(teacherCode).call({from: userAddress, gas:500000000});
+      setTeacherData(data);
+      console.log("Teacher Data:", data);
+    } catch (error) {
+      console.error("Error fetching teacher data:", error);
+    }
+    console.log("Teacher Code:",teacherCode);
   };
   // mt-6 w-48 bg-blue-900  hover:bg-gray-700
   return (
@@ -39,6 +63,19 @@ function GetTeacher() {
         </Button>
         </div>
       </form>
+      {teacherData && (
+          <div className="mt-4">
+            <Typography variant="h6" color="blue-gray">
+              Teacher Info:
+            </Typography>
+            <Typography color="gray">
+              Code: {teacherData.code}
+            </Typography>
+            <Typography color="gray">
+              Subject Codes: {teacherData.subjectCodes.join(', ')}
+            </Typography>
+          </div>
+        )}
     </Card>
     </div>
   );

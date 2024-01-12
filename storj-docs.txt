@@ -1,0 +1,53 @@
+Sattelite Address: 121RTSDpyNZVcEU84Ticf2L1ntiuUimbWgfATz21tuvgk3vzoA6@ap1.storj.io:7777
+API Key: 1dfJeSNHtu8Hk77ai8Cxzk7BRz8qVBokMBdVymS87znjs98pjmF4mDnoHimjaVW2t2n1niyenciPAMARvUrq6t4i91MnbfSRP6b3F1LJX7pYBQWZ9oun
+
+PS C:\Users\pragy\Desktop> ./uplink.exe setup
+
+Passphrase: pragya221
+
+========== GATEWAY CREDENTIALS ===========================================================
+Access Key ID: jxrcwdoomkvpjb7jxfejj3gcvfya
+Secret Key   : j3qkpysbfxbicibuyrdj3c6l32sq6fslipxnxhqhgm4npgb7gav22
+Endpoint     : https://gateway.storjshare.io
+
+PS C:\Users\pragy\Desktop> ./uplink.exe mb sj://cakes
+PS C:\Users\pragy\Desktop> ./uplink.exe cp C:\Users\pragy\Desktop\textfile.txt sj://cakes
+upload C:/Users/pragy/Desktop/textfile.txt to sj://cakes/textfile.txt
+C:/Users/pragy/Desktop/textfile.txt  62.17 KB / 62.17 KB [=========================] 100.00% 0.00 b/s
+PS C:\Users\pragy\Desktop> ./uplink.exe ls sj://cakes
+KIND    CREATED                SIZE     KEY
+OBJ     2024-01-06 20:50:22    62172    textfile.txt
+PS C:\Users\pragy\Desktop> ./uplink.exe cp sj://cakes/cheesecake.jpg C:\Users\pragy\Desktop\cheesecake.jpg
+download sj://cakes/cheesecake.jpg to C:/Users/pragy/Desktop/cheesecake.jpg
+error getting reader for part 0: uplink: object not found ("cheesecake.jpg")
+PS C:\Users\pragy\Desktop> ./uplink.exe cp sj://cakes/textfile.jpg C:\Users\pragy\Desktop\downloadedfile.txt
+download sj://cakes/textfile.jpg to C:/Users/pragy/Desktop/downloadedfile.txt
+error getting reader for part 0: uplink: object not found ("textfile.jpg")
+PS C:\Users\pragy\Desktop> ./uplink.exe cp sj://cakes/textfile.txt C:\Users\pragy\Desktop\downloadedfile.txt
+download sj://cakes/textfile.txt to C:/Users/pragy/Desktop/downloadedfile.txt
+C:/Users/pragy/Desktop/downloadedfile.txt  62.17 KB / 62.17 KB [===================] 100.00% 0.00 b/s
+PS C:\Users\pragy\Desktop> ./uplink.exe share --url sj://cakes/textfile.txt
+It's not recommended to create a shared Access without an expiration date.
+If you wish to do so anyway, please run this command with --not-after=none.
+PS C:\Users\pragy\Desktop> ./uplink.exe share --url sj://cakes/textfile.txt --not-after=none
+Sharing access to satellite 121RTSDpyNZVcEU84Ticf2L1ntiuUimbWgfATz21tuvgk3vzoA6@ap1.storj.io:7777
+=========== ACCESS RESTRICTIONS ==========================================================
+Download     : Allowed
+Upload       : Disallowed
+Lists        : Allowed
+Deletes      : Disallowed
+NotBefore    : No restriction
+NotAfter     : No restriction
+MaxObjectTTL : Not set
+Paths        : sj://cakes/textfile.txt
+=========== SERIALIZED ACCESS WITH THE ABOVE RESTRICTIONS TO SHARE WITH OTHERS ===========
+Access       : 1G1L4yzmnRr533S9sPcqDSpWi5nwE9v9fqARfxX9rYN38eWXtjFQAJiTV5c2QWPPbF2XVn9Lt9vEVzT7DcWPKABbUbx9FbJhmjQefhR3F5uMqKi1UFe2MDUawRGrJpqgLZ7VJrCHC5CJjMwkPDfzCQoWocu5bWZwtSXuw6cr3H2Why2tg4me6ohd12fUi69VWk5fXc3gZDwNCoJ9iHMMuj2EhHay2DLMewstCMuc4Z3zRJxhnMLfgYTJ3HosnuYsA5oTXGvtQa54WEyi8x8QVucsZR198nVb4uaKFDXACpVXSit3K9WhAMN6xCgboEKrYtMhxjJuszUyE1cLM5cYx9BGYVYBwcKpC8CfPaEuC3Zkr4E9hedP
+========== GATEWAY CREDENTIALS ===========================================================
+Access Key ID: jvm6awotzrntj4pxud5ivrwgtm4q
+Secret Key   : j22tgnrzkhyoa45wva67afpszsd2vfyxtbvkfzcn6mr3kod4gk566
+Endpoint     : https://gateway.storjshare.io
+Public Access: true
+=========== BROWSER URL ==================================================================
+REMINDER  : Object key must end in '/' when trying to share a prefix
+URL       : https://link.storjshare.io/s/jvm6awotzrntj4pxud5ivrwgtm4q/cakes/textfile.txt
+PS C:\Users\pragy\Desktop>

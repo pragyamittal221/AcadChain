@@ -80,41 +80,40 @@ function StudentForm({ contract }) {
         </Typography>
         <Typography color="gray" className="mt-1 font-normal"></Typography>
         <form
-  onSubmit={handleSubmit}
-  className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 flex justify-center"
->
-  <div className="mb-4 flex flex-col gap-6 items-center">
-    <Input
-      size="lg"
-      label="Password"
-      onChange={(e) => handleInputChange("password", e.target.value)}
-    />
-    <Input
-      size="lg"
-      label="Teacher Code"
-      onChange={(e) => handleInputChange("teacherCode", e.target.value)}
-    />
-    <Input
-      size="lg"
-      label="Subject Code"
-      onChange={(e) => handleInputChange("subjectCode", e.target.value)}
-    />
-
-      <EvaluationForm
-        formData={formData.ratings}
-        handleRatingChange={handleRatingChange}
-      />
-    <div className="w-full">
-      <Textarea
-        label="Comments"
-        onChange={(e) => handleInputChange("comment", e.target.value)}
-      />
-    </div>
-          <Button className="mt-6 w-48 bg-blue-900  hover:bg-gray-700" type="submit" disabled={isSubmitted}>
-            Submit
-          </Button>
-  </div>
-</form>
+          onSubmit={handleSubmit}
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 flex justify-center"
+        >
+          <div className="mb-4 flex flex-col gap-6 items-center">
+            <Input
+              size="lg"
+              label="Password"
+              onChange={(e) => handleInputChange("password", e.target.value)}
+            />
+            <Input
+              size="lg"
+              label="Teacher Code"
+              onChange={(e) => handleInputChange("teacherCode", e.target.value)}
+            />
+            <Input
+              size="lg"
+              label="Subject Code"
+              onChange={(e) => handleInputChange("subjectCode", e.target.value)}
+            />
+            <EvaluationForm
+              formData={formData.ratings}
+              handleRatingChange={handleRatingChange}
+            />
+            <div className="w-full">
+              <Textarea
+                label="Comments"
+                onChange={(e) => handleInputChange("comment", e.target.value)}
+              />
+            </div>
+              <Button className="mt-6 w-48 bg-blue-900  hover:bg-gray-700" type="submit" disabled={isSubmitted}>
+                Submit
+              </Button>
+          </div>
+        </form>
       </Card>
     </div>
   );

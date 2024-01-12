@@ -4,7 +4,7 @@ import IPFSRetriever from "./IPFSRetriever";
 
 function Student({ contract }) {
   return (
-    <div className="bg-gray-100 pb-14">
+    <div className="bg-gray-100 pb-14 pt-16">
       <StudentForm contract={contract}/>
       <IPFSRetriever/>
     </div>

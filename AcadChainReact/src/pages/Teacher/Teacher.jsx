@@ -6,7 +6,7 @@ import IPFSRetriever from "../Student/IPFSRetriever";
 
 function Teacher() {
   return (
-    <div className="bg-gray-100 pb-14">
+    <div className="bg-gray-100 pb-14 pt-16">
       <GetTeacher />
       <GetPassword />
       <GetReviews />

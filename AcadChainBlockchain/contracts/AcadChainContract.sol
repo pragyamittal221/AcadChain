@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.4.24;
-pragma experimental ABIEncoderV2;
+pragma solidity >=0.8.2 <0.9.0;
+
 // inherited contracts
 import "./Ownable.sol";
 import "./TeacherRole.sol";
@@ -38,18 +38,27 @@ contract AcadChainContract is Ownable, TeacherRole {
         }
     }
 
+    event TeacherRegistrationDataStored(address indexed teacherAddress, string teacherCode, string subjectCodes, string studentCounts);
+
+
     function storeTeacherRegistrationData(
-        address _userAddress,
         string memory _teacherCode,
         string memory _subjectCodes,
         string memory _studentCounts
     ) public {
-        teacherRegistrationData[_userAddress] = TeacherRegistrationData({
-            userAddress: _userAddress,
+        // Input validation
+        require(bytes(_teacherCode).length > 0, "Teacher code cannot be empty");
+        require(bytes(_subjectCodes).length > 0, "Subject codes cannot be empty");
+        require(bytes(_studentCounts).length > 0, "Student counts cannot be empty");
+        TeacherRegistrationData memory newTeacherRegistrationData = TeacherRegistrationData({
+            userAddress: msg.sender,
             teacherCode: _teacherCode,
             subjectCodes: _subjectCodes,
             studentCounts: _studentCounts
         });
+        teacherRegistrationData[msg.sender] = newTeacherRegistrationData;
+        teacherRegistrationKeys.push(msg.sender);
+        emit TeacherRegistrationDataStored(msg.sender, _teacherCode, _subjectCodes, _studentCounts);
     }
 
     function getTeacherRegistrationData()
@@ -57,12 +66,10 @@ contract AcadChainContract is Ownable, TeacherRole {
         view
         returns (TeacherRegistrationData[] memory)
     {
-        TeacherRegistrationData[] memory data;
+        TeacherRegistrationData[] memory data = new TeacherRegistrationData[](teacherRegistrationKeys.length);
 
         for (uint i = 0; i < teacherRegistrationKeys.length; i++) {
-            TeacherRegistrationData storage trd = teacherRegistrationData[
-                teacherRegistrationKeys[i]
-            ];
+            TeacherRegistrationData storage trd = teacherRegistrationData[teacherRegistrationKeys[i]];
             data[i] = TeacherRegistrationData({
                 userAddress: trd.userAddress,
                 teacherCode: trd.teacherCode,
@@ -70,27 +77,29 @@ contract AcadChainContract is Ownable, TeacherRole {
                 studentCounts: trd.studentCounts
             });
         }
-
         return data;
     }
 
-    function deleteTeacherRegistrationData(
-        address _userAddress
-    ) public onlyOwner {
-        delete teacherRegistrationData[_userAddress];
+    function deleteTeacherRegistrationData(address _userAddress) public onlyOwner {
+    // Delete data associated with the specified user address
+    delete teacherRegistrationData[_userAddress];
 
-        for (uint i = 0; i < teacherRegistrationKeys.length; i++) {
-            if (teacherRegistrationKeys[i] == _userAddress) {
-                teacherRegistrationKeys[i] = teacherRegistrationKeys[
-                    teacherRegistrationKeys.length - 1
-                ];
-                teacherRegistrationKeys.pop();
-                break;
+    // Find the index of the user address in teacherRegistrationKeys and remove it
+    for (uint i = 0; i < teacherRegistrationKeys.length; i++) {
+        if (teacherRegistrationKeys[i] == _userAddress) {
+            // Shift the remaining elements to fill the gap
+            for (uint j = i; j < teacherRegistrationKeys.length - 1; j++) {
+                teacherRegistrationKeys[j] = teacherRegistrationKeys[j + 1];
             }
+
+            // Remove the last element to avoid duplication
+            teacherRegistrationKeys.pop();
+            break; // No need to continue once the address is found and removed
         }
     }
+    }
 
-    function addTeacher(
+    function addNewTeacher(
         string memory _teacherCode,
         string[] memory _subjectCodes,
         uint[] memory _studentCount
@@ -139,7 +148,7 @@ contract AcadChainContract is Ownable, TeacherRole {
     function getReview(
         string memory _teacherCode,
         string memory _subjectCode
-    ) public view checkEitherOwnerOrTeacher returns (Review[] memory) {
+    ) public view checkEitherOwnerOrTeacher returns (Review[] memory review) {
         return (teachers[_teacherCode].reviewMap[_subjectCode]);
     }
 

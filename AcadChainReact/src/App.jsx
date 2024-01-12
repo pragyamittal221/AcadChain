@@ -13,7 +13,7 @@ function App() {
 
   const [account, setAccount] = useState("0x0");
   const [contract, setContract] = useState(null);
-  const [isTeacher, setIsTeacher] = useState(false);
+  // const [isTeacher, setIsTeacher] = useState(false);
   
   useEffect(() => {
     if (window.ethereum) {
@@ -35,8 +35,6 @@ function App() {
         const selectedAccount = accounts[0];
         setAccount(selectedAccount);
         connectContract(selectedAccount);
-        const isTeacher = await contract.methods.isTeacher(selectedAccount).call();
-        setIsTeacher(isTeacher);
       } catch (error) {
         console.error(error);
       }
@@ -46,8 +44,9 @@ function App() {
   // Update the contract address everytime the contract is deployed afresh.
   const connectContract = async (selectedAccount) => {
     const web3 = new Web3(window.ethereum);
-    const contractInstance = new web3.eth.Contract(AcadChainContract.abi, "0x99aBdeD799479Aa68B2cf3ff280AEf98926f1e68");
-
+    const contractInstance = new web3.eth.Contract(AcadChainContract.abi, "0x3B67D809081B45f3794fed038134f0BB8C6bf650");
+    // const isTeacher = await contractInstance.methods.isTeacher(selectedAccount).call();
+    // setIsTeacher(isTeacher);
     setContract(contractInstance);
   };
 
@@ -60,7 +59,7 @@ function App() {
           <Route path="/admin" element={<Admin contract={contract} />} />
           <Route path="/student" element={<Student contract={contract}/>} />
           {/* <Route path="/teacher" element={isTeacher ? <Teacher /> : <TeacherNotApproved contract={contract}/>} /> */}
-          <Route path="/teacher" element={<Teacher />} />
+          <Route path="/teacher" element={<Teacher contract={contract}/>} />
           <Route path="/teachernotapproved" element={<TeacherNotApproved contract={contract}/>} />
         </Routes>
       </Router>

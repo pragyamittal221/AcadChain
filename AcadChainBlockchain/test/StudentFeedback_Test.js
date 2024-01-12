@@ -17,19 +17,19 @@ contract('AcadChainContract', (accounts) => {
     });
     // Checks functions: addTeacher and getTeacher
     it("should add teacher and course information", async () => {
-        const added = await instance.addTeacher("Anand1",["CSE01","CSE02"],[5,3]);
+        const added = await instance.addNewTeacher("Anand1",["CSE01","CSE02"],[5,3]);
         const checkTeacher = await instance.getTeacher("Anand1");
         assert.equal(checkTeacher['0'], "Anand1", "Teacher account not added");
     });
     // Checks function: getPasswords
     it("should get passwords", async () => {
-        const added = await instance.addTeacher("Anand1",["CSE01","CSE02"],[5,3]);
+        const added = await instance.addNewTeacher("Anand1",["CSE01","CSE02"],[5,3]);
         const checkPassword = await instance.getPasswords("Anand1", "CSE01");
         assert.equal(checkPassword.length, 5, "Could not get password");
     });
     // Checks function: getReview and addReview
     it("should retrieve the review added", async () => {
-        await instance.addTeacher("Anand1",["CSE01","CSE02"],[5,3]);
+        await instance.addNewTeacher("Anand1",["CSE01","CSE02"],[5,3]);
         const password = await instance.getPasswords("Anand1", "CSE01");
         const ratings = ["4", "4", "4", "4", "4"];
         await instance.addReview("Anand1", "CSE01", ratings, "Great Teacher!", password[0]);

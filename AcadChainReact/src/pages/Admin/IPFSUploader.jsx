@@ -1,3 +1,47 @@
+import React, { useState } from 'react';
+import { create } from 'ipfs-http-client';
+import { Input, Button, Typography } from "@material-tailwind/react";
+
+const client = create('https://ipfs.infura.io:5001/api/v0');
+
+function IPFSUploader() {
+  const [file, setFile] = useState(null);
+
+  const uploadFile = async () => {
+    try {
+      const added = await client.add(file);
+      console.log('Uploaded file:', added.path);
+    } catch (error) {
+      console.error('Error uploading file: ', error);
+    }  
+  };
+
+  return (
+    <div className="flex flex-col gap-6 items-center bg-gray-100 ">
+      <div color="white" className="w-full max-w-2xl p-16 bg-white rounded-xl shadow-md items-center ">
+        <Typography variant="h4" color="blue-gray" className='flex justify-center'>
+          Upload Report Card
+        </Typography>
+        <div className="flex justify-center mt-8">
+          <Input
+            type="file"
+            size="lg"
+            label="Select a file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </div>
+        <div className="flex justify-center">
+          <Button className="mt-8 w-48 bg-blue-900 hover:bg-gray-700" onClick={uploadFile}>
+            Upload
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default IPFSUploader;
+
 // import React, { useState } from "react";
 
 // function PdfUploadForm() {
@@ -73,46 +117,3 @@
 // }
 
 // export default PdfUploadForm;
-import React, { useState } from 'react';
-import { create } from 'ipfs-http-client';
-import { Input, Button, Typography } from "@material-tailwind/react";
-
-const client = create('https://ipfs.infura.io:5001/api/v0');
-
-function IPFSUploader() {
-  const [file, setFile] = useState(null);
-
-  const uploadFile = async () => {
-    try {
-      const added = await client.add(file);
-      console.log('Uploaded file:', added.path);
-    } catch (error) {
-      console.error('Error uploading file: ', error);
-    }  
-  };
-
-  return (
-    <div className="flex flex-col gap-6 items-center bg-gray-100 pt-12">
-      <div color="white" className="w-full max-w-2xl p-16 bg-white rounded-xl shadow-md items-center ">
-        <Typography variant="h4" color="blue-gray" className='flex justify-center'>
-          Upload File
-        </Typography>
-        <div className="flex justify-center mt-8">
-          <Input
-            type="file"
-            size="lg"
-            label="Select a file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </div>
-        <div className="flex justify-center">
-          <Button className="mt-8 w-48 bg-blue-900 hover:bg-gray-700" onClick={uploadFile}>
-            Upload
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default IPFSUploader;
