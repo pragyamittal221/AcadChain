@@ -2,10 +2,8 @@ let acadChain = await AcadChainContract.deployed()
 
 let accounts = await web3.eth.getAccounts()
 
-acadChain.addStudent(accounts[2])
 acadChain.addTeacher(accounts[1])
 
-acadChain.isStudent(accounts[2])
 acadChain.isTeacher(accounts[1])
 
 acadChain.addNewTeacher("Pragya",["CSE01","CSE02"],[5,3])
@@ -20,7 +18,7 @@ acadChain.getPasswords("Pragya","CSE02")
 acadChain.getPasswords("Bapatla1","CSE01")
 
 
-acadChain.addReview("Pragya","CSE01",5,"Good",98214,{from: accounts[2]})
+acadChain.addReview("Pragya","CSE01", ['Excellent', 'Excellent', 'Excellent', 'Excellent', 'Excellent'], "okTeacher",90336)
 
 acadChain.getReview("Pragya","CSE01")
 acadChain.getReview("Pragya","CSE01",{from: accounts[2]})

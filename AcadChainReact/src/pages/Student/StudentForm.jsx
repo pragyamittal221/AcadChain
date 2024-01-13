@@ -7,8 +7,9 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import EvaluationForm from "./EvaluationForm";
+import { useContract, useUserAddress } from "../../connectContract";
 
-function StudentForm({ contract }) {
+function StudentForm() {
   const [formData, setFormData] = useState({
     password: "",
     teacherCode: "",
@@ -22,8 +23,10 @@ function StudentForm({ contract }) {
       row5: { text: "Quality and creativity of assignments", rating: "" },
     },
   });
-
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const contract = useContract();
+  const userAddress = useUserAddress();
 
   const handleInputChange = (name, value) => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -46,30 +49,28 @@ function StudentForm({ contract }) {
       alert("Please fill all fields before submitting.");
       return;
     }
-    console.log("Form Data:", formData);
     setIsSubmitted(true);
     const ratings = Object.values(formData.ratings).map(ratingData => ratingData.rating);
-    if (contract) {
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      const selectedAccount = accounts[0];
-      await contract.methods.addReview(
-        formData.teacherCode,
-        formData.subjectCode,
-        ratings,
-        formData.comment,
-        parseInt(formData.password)
-        ).send({ from: selectedAccount })
-        .then((receipt) => {
-          console.log("here4");
-          console.log('Transaction successful!', receipt);
-          alert('Review added successfully!');
-        })
-        .catch((error) => {
-          console.log("here5");
-          console.error('An error occurred:', error);
-          alert('Failed to add review. Please try again.');
-    });
-  }
+    console.log("Form Data:", formData, "ratings", ratings);
+    if (contract && userAddress) {
+      try {
+        // Call the addReview function from the smart contract
+        const receipt = await contract.methods.addReview(
+          formData.teacherCode,
+          formData.subjectCode,
+          ratings,
+          formData.comment,
+          parseInt(formData.password)
+        ).send({ from: userAddress, gas: 500000000 });
+        console.log('Transaction successful!', receipt);
+        alert('Review added successfully!');
+      } catch (error) {
+        console.error('An error occurred:', error);
+        alert('Failed to add review. Please try again.');
+      }
+    } else {
+      console.log('Contract or user address not available.');
+    }
   };
 
   return (
