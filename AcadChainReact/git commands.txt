@@ -1,28 +1,30 @@
-*****************Not recommended*******************
+Copy code link from: code (bright green button) -> local -> https link
+git clone <paste link>
+git add .
+git commit -m "comment"
+git status
+git push
+git pull 
 
-****************git init
-		git add README.md
-		git commit -m "first commit"
-		git branch -M main
-		git remote add origin https://github.com/pragyamittal221/acadChainDapp.git
-		git push -u origin main
-****************git pull origin main
 
-***************************************************
+
+
+
+
+Not recommended:
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/pragyamittal221/acadChainDapp.git
+git push -u origin main
+git pull origin main
+
 
 
 Create a new repo
 Add a README
 Create a repo
 
-<if you just want to contribute, start here ->
-Copy code link from: code (bright green button) -> local -> https link
 
-git clone <paste link>
-
-git add .
-git commit -m "comment"
-git status
-git push
-
-git pull 
