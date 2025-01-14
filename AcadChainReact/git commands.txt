@@ -22,6 +22,7 @@ git clone <paste link>
 
 git add .
 git commit -m "comment"
+git status
 git push
 
 git pull 
